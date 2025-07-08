@@ -1,0 +1,32 @@
+# Discord Bot Framework
+discord.py==2.3.2
+
+# LLM and AI Orchestration
+langchain>=0.3.0
+langchain-pinecone>=0.2.0
+langchain-community>=0.3.0
+langchain-openai>=0.2.0
+openai>=1.86.0
+
+# Vector Database
+pinecone-client>=6.0.0,<8.0.0
+
+# Data Models and Validation
+pydantic>=2.7.4
+pydantic-settings>=2.1.0
+
+# Database
+aiosqlite==0.19.0
+
+# Utilities
+python-dotenv==1.0.0
+numpy>=1.26.0
+tiktoken>=0.5.0
+aiofiles>=23.2.0
+
+# Logging
+colorlog>=6.8.0
+
+# Development (optional)
+# pytest>=7.4.0
+# pytest-asyncio>=0.23.0 
