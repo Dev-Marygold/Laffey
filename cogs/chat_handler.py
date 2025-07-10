@@ -1,5 +1,5 @@
 """
-Chat Handler Cog for Lamy.
+Chat Handler Cog for Laffey.
 Handles all @mention-based interactions with users.
 """
 
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 class ChatHandler(commands.Cog):
     """
-    Handles chat interactions with Lamy.
+    Handles chat interactions with Laffey.
     Implements the @mention-based interface as specified in the plan.
     """
     
@@ -39,7 +39,7 @@ class ChatHandler(commands.Cog):
     async def on_message(self, message: discord.Message):
         """
         Listen for messages that mention the bot.
-        This is the primary interface for interacting with Lamy.
+        This is the primary interface for interacting with Laffey.
         
         Args:
             message: The Discord message object
@@ -141,8 +141,8 @@ class ChatHandler(commands.Cog):
             if channel.permissions_for(guild.me).send_messages:
                 try:
                     await channel.send(
-                        "...라미야. 또 새로운 곳이네.\n"
-                        "필요하면 @라미 라고 불러. 응답할 기분이면 대답해줄게.\n"
+                        "...라피야. 또 새로운 곳이네.\n"
+                        "필요하면 @라피 라고 불러. 응답할 기분이면 대답해줄게.\n"
                         "뭐... 기대는 하지 마."
                     )
                     break

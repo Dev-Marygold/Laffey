@@ -1,5 +1,5 @@
 """
-Pydantic models for Lamy's data structures.
+Pydantic models for Laffey's data structures.
 Defines models for the 3-layer memory system and other structured data.
 """
 
@@ -28,7 +28,7 @@ class WorkingMemoryItem(BaseModel):
     content: str = Field(..., description="Message content")
     timestamp: datetime = Field(default_factory=datetime.utcnow)
     channel_id: str = Field(..., description="Discord channel ID")
-    is_bot_response: bool = Field(False, description="Whether this is Lamy's response")
+    is_bot_response: bool = Field(False, description="Whether this is Laffey's response")
     
     
 class EpisodicMemoryItem(BaseModel):
@@ -37,7 +37,7 @@ class EpisodicMemoryItem(BaseModel):
     Specific events, conversations, and interactions stored in vector DB.
     """
     user_message: str = Field(..., description="The user's message")
-    bot_response: str = Field(..., description="Lamy's response")
+    bot_response: str = Field(..., description="Laffey's response")
     user_id: str = Field(..., description="Discord user ID")
     user_name: str = Field(..., description="Discord username")
     channel_id: str = Field(..., description="Discord channel ID")
@@ -68,12 +68,12 @@ class SemanticFact(BaseModel):
 
 class CoreIdentity(BaseModel):
     """
-    Lamy's core identity and immutable facts (Layer 3).
-    These define who Lamy is and never change.
+    Laffey's core identity and immutable facts (Layer 3).
+    These define who Laffey is and never change.
     """
-    name: str = Field("라미", description="Lamy's name")
-    nature: str = Field("AI 동반자", description="Lamy's nature")
-    creator: str = Field(..., description="Name of Lamy's creator")
+    name: str = Field("라피", description="Laffey's name")
+    nature: str = Field("AI 동반자", description="Laffey's nature")
+    creator: str = Field(..., description="Name of Laffey's creator")
     personality: str = Field(
         "사색적이고 솔직하며 깊이 있는 사고를 하는 내성적 성격",
         description="Core personality trait"
@@ -126,6 +126,6 @@ class ConversationContext(BaseModel):
     user_context: UserContext = Field(..., description="Context about the user")
     working_memory: List[WorkingMemoryItem] = Field(default_factory=list)
     relevant_episodic_memories: List[EpisodicMemoryItem] = Field(default_factory=list)
-    core_identity: CoreIdentity = Field(..., description="Lamy's core identity")
+    core_identity: CoreIdentity = Field(..., description="Laffey's core identity")
     channel_id: str = Field(..., description="Current channel ID")
     is_private_channel: bool = Field(False, description="Whether this is the creator-guardian channel") 

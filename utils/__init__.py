@@ -1,5 +1,5 @@
 """
-Utils package for Lamy bot.
+Utils package for Laffey bot.
 Contains utility functions and helpers.
 """
 

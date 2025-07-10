@@ -1,5 +1,5 @@
 """
-Memory Manager for Lamy's 3-layer memory system.
+Memory Manager for Laffey's 3-layer memory system.
 Manages working memory, episodic memory (Pinecone), and semantic memory (JSON/SQLite).
 """
 
@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 class MemoryManager:
     """
-    Manages Lamy's 3-layer memory system:
+    Manages Laffey's 3-layer memory system:
     1. Working Memory (Layer 1): Recent chat history in memory
     2. Episodic Memory (Layer 2): Vector database (Pinecone)
     3. Semantic Memory (Layer 3): Structured facts (JSON/SQLite)
@@ -79,7 +79,7 @@ class MemoryManager:
             pc = Pinecone(api_key=api_key)
             logger.info("Pinecone client created")
             
-            index_name = os.getenv("PINECONE_INDEX_NAME", "lamy-memories")
+            index_name = os.getenv("PINECONE_INDEX_NAME", "laffey-memories")
             
             # Create index if it doesn't exist
             existing_indexes = [index_info["name"] for index_info in pc.list_indexes()]
@@ -275,7 +275,7 @@ class MemoryManager:
             
         try:
             # Create text representation for embedding
-            text = f"User {memory.user_name}: {memory.user_message}\nLamy: {memory.bot_response}"
+            text = f"User {memory.user_name}: {memory.user_message}\nLaffey: {memory.bot_response}"
             
             # Create metadata
             metadata = {
@@ -405,7 +405,7 @@ class MemoryManager:
                 return False
                 
             # Get the Pinecone index
-            index_name = os.getenv("PINECONE_INDEX_NAME", "lamy-memories")
+            index_name = os.getenv("PINECONE_INDEX_NAME", "laffey-memories")
             pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
             index = pc.Index(index_name)
             
@@ -447,7 +447,7 @@ class MemoryManager:
                 
             # Then add the updated memory with the same ID
             # Create text representation for embedding
-            text = f"User {updated_memory.user_name}: {updated_memory.user_message}\nLamy: {updated_memory.bot_response}"
+            text = f"User {updated_memory.user_name}: {updated_memory.user_message}\nLaffey: {updated_memory.bot_response}"
             
             # Create metadata
             metadata = {
@@ -779,7 +779,7 @@ class MemoryManager:
             if self.pinecone_ready and self.vector_store:
                 try:
                     # Get Pinecone index and delete all vectors
-                    index_name = os.getenv("PINECONE_INDEX_NAME", "lamy-memories")
+                    index_name = os.getenv("PINECONE_INDEX_NAME", "laffey-memories")
                     pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
                     index = pc.Index(index_name)
                     

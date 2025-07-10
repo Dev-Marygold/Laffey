@@ -1,5 +1,5 @@
 """
-Orchestration Core for Lamy.
+Orchestration Core for Laffey.
 Central brain that coordinates between Discord events, memory management, and LLM generation.
 """
 
@@ -98,7 +98,7 @@ class OrchestrationCore:
             # Add bot response to working memory
             bot_message = WorkingMemoryItem(
                 user_id="bot",
-                user_name="라미",
+                user_name="라피",
                 content=llm_response.content,
                 channel_id=channel_id,
                 is_bot_response=True

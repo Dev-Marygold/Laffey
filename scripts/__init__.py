@@ -1,3 +1,3 @@
 """
-Scripts for Lamy bot maintenance and setup.
+Scripts for Laffey bot maintenance and setup.
 """ 

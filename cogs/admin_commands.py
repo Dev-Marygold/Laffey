@@ -1,5 +1,5 @@
 """
-Admin Commands Cog for Lamy.
+Admin Commands Cog for Laffey.
 Implements developer-only slash commands for system management.
 """
 
@@ -337,12 +337,12 @@ class KnowledgeManagementView(discord.ui.View):
         )
 
 
-class LearnModal(discord.ui.Modal, title="라미에게 지식 가르치기"):
-    """Modal for teaching Lamy new knowledge through Q&A pairs."""
+class LearnModal(discord.ui.Modal, title="라피에게 지식 가르치기"):
+    """Modal for teaching Laffey new knowledge through Q&A pairs."""
     
     question = discord.ui.TextInput(
         label="질문",
-        placeholder="예: 라미가 좋아하는 음식이 뭐야?",
+        placeholder="예: 라피가 좋아하는 음식이 뭐야?",
         required=True,
         max_length=500,
         style=discord.TextStyle.short
@@ -350,7 +350,7 @@ class LearnModal(discord.ui.Modal, title="라미에게 지식 가르치기"):
     
     answer = discord.ui.TextInput(
         label="답변",
-        placeholder="예: 라미는 블랙커피와 단순한 음식을 좋아해. 복잡한 요리보다는 솔직한 맛을 선호하지.",
+        placeholder="예: 라피는 블랙커피와 단순한 음식을 좋아해. 복잡한 요리보다는 솔직한 맛을 선호하지.",
         required=True,
         max_length=1000,
         style=discord.TextStyle.paragraph
@@ -411,7 +411,7 @@ class LearnModal(discord.ui.Modal, title="라미에게 지식 가르치기"):
 
 class AdminCommands(commands.Cog):
     """
-    Admin commands for managing Lamy's systems.
+    Admin commands for managing Laffey's systems.
     All commands are restricted to the developer only.
     """
     
@@ -441,7 +441,7 @@ class AdminCommands(commands.Cog):
         stats = self.orchestrator.get_memory_stats()
         # Create status embed
         embed = discord.Embed(
-            title="라미 시스템 상태",
+            title="라피 시스템 상태",
             color=discord.Color.dark_grey(),
             timestamp=datetime.utcnow()
         )
@@ -508,16 +508,16 @@ class AdminCommands(commands.Cog):
             embed.add_field(
                 name=f"{i}. {memory.user_name} ({memory.timestamp.strftime('%Y-%m-%d %H:%M')})",
                 value=f"**사용자:** {memory.user_message[:50]}{'...' if len(memory.user_message) > 50 else ''}\n"
-                      f"**라미:** {memory.bot_response[:50]}{'...' if len(memory.bot_response) > 50 else ''}\n"
+                      f"**라피:** {memory.bot_response[:50]}{'...' if len(memory.bot_response) > 50 else ''}\n"
                       f"**관련성:** {memory.relevance_score:.2f}",
                 inline=False
             )
         await interaction.followup.send(embed=embed, ephemeral=True)
         
-    @app_commands.command(name="learn", description="라미에게 새로운 지식을 가르칩니다")
+    @app_commands.command(name="learn", description="라피에게 새로운 지식을 가르칩니다")
     async def learn(self, interaction: discord.Interaction):
         """
-        Teach Lamy new knowledge through Q&A pairs.
+        Teach Laffey new knowledge through Q&A pairs.
         모든 사용자가 사용할 수 있는 명령어.
         """
         modal = LearnModal(self.orchestrator)

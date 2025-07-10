@@ -25,7 +25,7 @@ def reset_pinecone_index():
     pc = Pinecone(api_key=api_key)
     
     # 인덱스 정보
-    index_name = os.getenv("PINECONE_INDEX_NAME", "lamy-memories")
+    index_name = os.getenv("PINECONE_INDEX_NAME", "laffey-memories")
     region = os.getenv("PINECONE_ENVIRONMENT", "us-east-1")
     
     print(f"🔍 인덱스 확인: {index_name}")

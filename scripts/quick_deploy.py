@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-라미 봇 빠른 배포 스크립트
+라피 봇 빠른 배포 스크립트
 코드 수정 후 이 스크립트만 실행하면 자동으로 Heroku에 배포됩니다.
 """
 
@@ -32,7 +32,7 @@ def run_command(command, description=""):
         return False
 
 def main():
-    print("🚀 라미 봇 빠른 배포 스크립트")
+    print("🚀 라피 봇 빠른 배포 스크립트")
     print("=" * 50)
     
     # 1. 커밋 메시지 입력받기
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     try:
         success = main()
         if success:
-            print("\n🎊 라미 봇이 성공적으로 업데이트되었습니다!")
+            print("\n🎊 라피 봇이 성공적으로 업데이트되었습니다!")
         else:
             print("\n😞 배포 중 문제가 발생했습니다.")
             sys.exit(1)

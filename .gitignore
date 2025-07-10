@@ -33,7 +33,7 @@ logs/
 # Data files
 data/*.json
 !data/core_identity.json.example
-!data/lamy_persona.txt
+!data/laffey_persona.txt
 
 # OS
 .DS_Store

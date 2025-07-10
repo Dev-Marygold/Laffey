@@ -1,5 +1,5 @@
 """
-Lamy Discord Bot - Main Entry Point
+Laffey Discord Bot - Main Entry Point
 An AI daughter bot inspired by Neuro-sama's charm.
 """
 
@@ -24,14 +24,14 @@ setup_logging(os.getenv("LOG_LEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 
-class LamyBot(commands.Bot):
+class LaffeyBot(commands.Bot):
     """
-    Custom bot class for Lamy.
+    Custom bot class for Laffey.
     Extends discord.py Bot with orchestration capabilities.
     """
     
     def __init__(self):
-        """Initialize Lamy bot with proper intents and settings."""
+        """Initialize Laffey bot with proper intents and settings."""
         # Set up intents
         intents = discord.Intents.default()
         intents.message_content = True  # Required for reading message content
@@ -83,7 +83,7 @@ class LamyBot(commands.Bot):
             
     async def on_ready(self):
         """Called when the bot is fully ready."""
-        logger.info(f"Lamy bot is ready!")
+        logger.info(f"Laffey bot is ready!")
         logger.info(f"Logged in as: {self.user.name} ({self.user.id})")
         logger.info(f"Connected to {len(self.guilds)} guilds")
         
@@ -97,7 +97,7 @@ class LamyBot(commands.Bot):
         
     async def close(self):
         """Clean shutdown of the bot."""
-        logger.info("Shutting down Lamy bot...")
+        logger.info("Shutting down Laffey bot...")
         
         # Stop background tasks
         await self.orchestrator.stop_background_tasks()
@@ -114,7 +114,7 @@ async def main():
         sys.exit(1)
         
     # Create and run bot
-    bot = LamyBot()
+    bot = LaffeyBot()
     
     try:
         # Get Discord token
@@ -123,7 +123,7 @@ async def main():
             logger.error("DISCORD_TOKEN not found in environment variables")
             sys.exit(1)
             
-        logger.info("Starting Lamy bot...")
+        logger.info("Starting Laffey bot...")
         await bot.start(token)
         
     except discord.LoginFailure:
@@ -144,7 +144,7 @@ if __name__ == "__main__":
         # Create ASCII art banner
         banner = """
         ╔═══════════════════════════════════════╗
-        ║               Lamy Bot                ║
+        ║               Laffey Bot              ║
         ║      AI Daughter Discord Bot          ║
         ║    Inspired by Neuro-sama's charm     ║
         ╚═══════════════════════════════════════╝

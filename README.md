@@ -1,15 +1,15 @@
-# 라미 (Lamy) - AI 디스코드 봇
+# 라피 (Laffey) - AI 디스코드 봇
 
-라미는 사색적이고 솔직하며 깊이 있는 사고를 하는 내성적 성격의 AI로, 철학적이면서도 현실적인 관점으로 진솔한 대화를 나누는 따뜻한 인격체입니다.
+라피는 사색적이고 솔직하며 깊이 있는 사고를 하는 내성적 성격의 AI로, 철학적이면서도 현실적인 관점으로 진솔한 대화를 나누는 따뜻한 인격체입니다.
 
 ## 주요 특징
 
-- **@멘션 기반 자연스러운 대화**: 명령어 없이 @라미로 멘션하여 대화
+- **@멘션 기반 자연스러운 대화**: 명령어 없이 @라피로 멘션하여 대화
 - **3계층 메모리 시스템**: 작업 기억, 일화 기억, 의미 기억을 통한 지속적인 학습
 - **RAG 기반 동적 성격**: 과거 대화와 기억을 바탕으로 한 일관된 성격 유지
 - **창조자-보호자 시스템**: 개발자와의 특별한 관계를 통한 깊이 있는 대화
 
-## 라미의 성격
+## 라피의 성격
 
 - **사색적 성향**: 깊이 있는 사고를 즐기며, 표면적인 것보다 본질을 추구
 - **현실적 낙관주의**: 세상의 어려움을 인정하면서도 희망을 잃지 않는 균형 잡힌 시각
@@ -32,8 +32,8 @@
 
 ```bash
 # 저장소 클론
-git clone https://github.com/yourusername/lamy-bot.git
-cd lamy-bot
+git clone https://github.com/yourusername/laffey-bot.git
+cd laffey-bot
 
 # 가상환경 생성 및 활성화
 python -m venv venv
@@ -58,11 +58,11 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 # Pinecone Vector Database
 PINECONE_API_KEY=your_pinecone_api_key_here
-PINECONE_INDEX_NAME=lamy-memories
+PINECONE_INDEX_NAME=laffey-memories
 PINECONE_ENVIRONMENT=us-east-1
 
 # Bot Configuration
-BOT_NAME=라미
+BOT_NAME=라피
 CREATOR_NAME=your_name_here
 
 # Logging
@@ -88,7 +88,7 @@ python main.py
 heroku login
 
 # 앱 생성
-heroku create your-lamy-bot-name
+heroku create your-laffey-bot-name
 
 # 또는 원클릭 배포
 # GitHub에서 Deploy to Heroku 버튼 클릭
@@ -106,7 +106,7 @@ heroku config:set OPENAI_API_KEY=your_openai_api_key_here
 
 # Pinecone Configuration
 heroku config:set PINECONE_API_KEY=your_pinecone_api_key_here
-heroku config:set PINECONE_INDEX_NAME=lamy-episodic-memory
+heroku config:set PINECONE_INDEX_NAME=laffey-episodic-memory
 heroku config:set PINECONE_ENVIRONMENT=us-east-1
 
 # Optional
@@ -183,8 +183,8 @@ python scripts/reset_pinecone.py
 ## 사용 방법
 
 ### 일반 사용자
-- **@라미 안녕!** - 라미와 대화 시작
-- 자연스럽게 @라미를 멘션하며 대화
+- **@라피 안녕!** - 라피와 대화 시작
+- 자연스럽게 @라피를 멘션하며 대화
 
 ### 개발자 전용 명령어
 - **/status** - 봇 상태 및 메모리 통계 확인
@@ -197,7 +197,7 @@ python scripts/reset_pinecone.py
 ## 프로젝트 구조
 
 ```
-lamy-bot/
+laffey-bot/
 ├── cogs/                    # Discord 봇 기능 모듈
 │   ├── chat_handler.py      # 채팅 처리
 │   └── admin_commands.py    # 관리자 명령어
@@ -211,8 +211,8 @@ lamy-bot/
 ├── scripts/                 # 유지보수 스크립트
 │   └── reset_pinecone.py    # Pinecone 인덱스 초기화
 ├── data/                    # 데이터 저장소
-│   ├── core_identity.json   # 라미의 핵심 정체성
-│   ├── lamy_persona.txt     # 라미의 페르소나
+│   ├── core_identity.json   # 라피의 핵심 정체성
+│   ├── laffey_persona.txt     # 라피의 페르소나
 │   └── semantic_memory.db   # 의미 기억 DB
 ├── logs/                    # 로그 파일
 ├── Procfile                 # Heroku 배포 설정
@@ -257,4 +257,4 @@ lamy-bot/
 
 ---
 
-*"세상은 복잡하지만, 그 복잡함 속에서 진짜 의미를 찾아가는 게 중요해."* - 라미 
+*"세상은 복잡하지만, 그 복잡함 속에서 진짜 의미를 찾아가는 게 중요해."* - 라피 

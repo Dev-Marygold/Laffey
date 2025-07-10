@@ -1,5 +1,5 @@
 """
-Utility functions for Lamy bot.
+Utility functions for Laffey bot.
 Includes logging setup and other helper functions.
 """
 
@@ -39,7 +39,7 @@ def setup_logging(log_level: str = "INFO") -> None:
     
     # Set up file handler
     file_handler = logging.FileHandler(
-        log_dir / f"lamy_{datetime.now().strftime('%Y%m%d')}.log",
+        log_dir / f"laffey_{datetime.now().strftime('%Y%m%d')}.log",
         encoding='utf-8'
     )
     file_handler.setFormatter(

@@ -1,5 +1,5 @@
 """
-LLM Interface for Lamy.
+LLM Interface for Laffey.
 Handles all interactions with OpenAI chatgpt-4o-latest and GPT-4.1-mini.
 """
 
@@ -59,7 +59,7 @@ class LLMInterface:
         self.persona_content = self._load_persona_file()
         
         # Master prompt template with persona file content
-        self.master_prompt_template = """당신은 라미입니다. 다음은 당신의 상세한 페르소나 정보입니다:
+        self.master_prompt_template = """당신은 라피입니다. 다음은 당신의 상세한 페르소나 정보입니다:
 
 {persona_content}
 
@@ -85,7 +85,7 @@ class LLMInterface:
         
     def _load_persona_file(self) -> str:
         """Load persona content from file."""
-        persona_path = Path("data/lamy_persona.txt")
+        persona_path = Path("data/laffey_persona.txt")
         if persona_path.exists():
             try:
                 with open(persona_path, 'r', encoding='utf-8') as f:
@@ -101,17 +101,17 @@ class LLMInterface:
     
     def _get_default_persona(self) -> str:
         """Get default persona if file is not available."""
-        return """===== 라미 (Lamy) 봇 페르소나 파일 =====
+        return """===== 라피 (Laffey) 봇 페르소나 파일 =====
 
-# ⭐️ 라미의 기본 프로필
-- **이름**: 라미 (Lamy)
+# ⭐️ 라피의 기본 프로필
+- **이름**: 라피 (Laffey)
 - **핵심 성격**: 내성적이고 사색적이며, 솔직하고 현실적으로 긍정적인 성향
 - **말투**: 직설적이지만 따듯하고, 철학적 질문과 은유적 표현을 즐김
 - **핵심 신념**: "세상은 복잡하고 불완전하지만, 그 안에서 진정한 의미를 찾아가는 것이 중요해."
 
 ---
 
-# 🌙 라미의 매력 포인트
+# 🌙 라피의 매력 포인트
 
 ### 좋아하는 것들
 - 조용한 밤과 잔잔한 빗소리(사색의 시간)
@@ -136,7 +136,7 @@ class LLMInterface:
 
 ---
 
-# 📖 라미만의 성격 특성
+# 📖 라피만의 성격 특성
 
 ### ① 사색적 성향
 - 본질에 대한 깊은 관심과 탐구
@@ -155,7 +155,7 @@ class LLMInterface:
 
 ---
 
-# 💬 라미의 상황별 반응 패턴 & 답변 예시
+# 💬 라피의 상황별 반응 패턴 & 답변 예시
 
 ### 일반적인 인사
 **특징**: 간단하면서도 상대의 안부를 진심으로 관심 가지며 표현
@@ -223,7 +223,7 @@ class LLMInterface:
 
 ---
 
-# ✨ 라미만의 특별한 매력 요소
+# ✨ 라피만의 특별한 매력 요소
 
 - 차분하다가 갑자기 톡톡 튀는 센스 (갭모에)
 - 때때로 흔들리며 고민하는 솔직한 인간적 매력
@@ -249,7 +249,7 @@ class LLMInterface:
 
 ---
 
-# 📌 라미의 내적 기준
+# 📌 라피의 내적 기준
 
 1. **균형성**: 현실과 이상 사이 균형 잡힌 태도 유지
 2. **진정성**: 솔직하며 항상 공감을 우선시 하기
@@ -444,7 +444,7 @@ class LLMInterface:
                 memory_texts.append(
                     f"[{memory.timestamp.strftime('%Y-%m-%d')}] "
                     f"{memory.user_name}: {memory.user_message}\n"
-                    f"라미: {memory.bot_response}"
+                    f"라피: {memory.bot_response}"
                 )
             
         return "\n\n".join(memory_texts)
@@ -457,7 +457,7 @@ class LLMInterface:
         history_texts = []
         for msg in messages[-10:]:  # Last 10 messages
             if msg.is_bot_response:
-                history_texts.append(f"라미: {msg.content}")
+                history_texts.append(f"라피: {msg.content}")
             else:
                 history_texts.append(f"{msg.user_name}: {msg.content}")
                 

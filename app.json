@@ -1,8 +1,8 @@
 {
-  "name": "Lamy Discord Bot",
+  "name": "Laffey Discord Bot",
   "description": "AI Discord Bot with advanced memory system",
   "keywords": ["discord", "bot", "ai", "llm"],
-  "repository": "https://github.com/your-username/lamy-bot",
+  "repository": "https://github.com/your-username/laffey-bot",
   "success_url": "https://discord.com/developers/applications",
   "env": {
     "DISCORD_TOKEN": {
@@ -31,7 +31,7 @@
     },
     "PINECONE_INDEX_NAME": {
       "description": "Pinecone Index Name",
-      "value": "lamy-episodic-memory",
+      "value": "laffey-episodic-memory",
       "required": true
     },
     "PINECONE_ENVIRONMENT": {

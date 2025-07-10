@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Interactive setup script for creating .env file for Lamy bot.
+Interactive setup script for creating .env file for Laffey bot.
 """
 
 import os
@@ -10,7 +10,7 @@ import json
 
 def create_env_file():
     """Create .env file with user input."""
-    print("🌸 라미 봇 환경 설정 🌸")
+    print("🌸 라피 봇 환경 설정 🌸")
     print("=" * 50)
     print("이 스크립트는 .env 파일을 생성합니다.")
     print("각 항목에 대한 값을 입력해주세요.\n")
@@ -28,11 +28,11 @@ def create_env_file():
     
     print("\n[ Pinecone 설정 ]")
     env_values['PINECONE_API_KEY'] = input("Pinecone API 키 (선택사항, Enter로 건너뛰기): ").strip()
-    env_values['PINECONE_INDEX_NAME'] = input("Pinecone 인덱스 이름 (기본값: lamy-memories): ").strip() or "lamy-memories"
+    env_values['PINECONE_INDEX_NAME'] = input("Pinecone 인덱스 이름 (기본값: laffey-memories): ").strip() or "laffey-memories"
     env_values['PINECONE_ENVIRONMENT'] = input("Pinecone 환경 (기본값: us-east-1): ").strip() or "us-east-1"
     
     print("\n[ 봇 설정 ]")
-    env_values['BOT_NAME'] = input("봇 이름 (기본값: 라미): ").strip() or "라미"
+    env_values['BOT_NAME'] = input("봇 이름 (기본값: 라피): ").strip() or "라피"
     env_values['CREATOR_NAME'] = input("창조자 이름: ").strip()
     
     print("\n[ 로깅 ]")
@@ -99,19 +99,19 @@ LOG_LEVEL={LOG_LEVEL}
         print("✅ 핵심 정체성 파일이 생성되었습니다!")
     
     # Create persona file if it doesn't exist
-    persona_path = data_dir / 'lamy_persona.txt'
+    persona_path = data_dir / 'laffey_persona.txt'
     if not persona_path.exists():
-        persona_content = """===== 라미 (Lamy) 봇 페르소나 파일 =====
+        persona_content = """===== 라피 (Laffey) 봇 페르소나 파일 =====
 
-# ⭐️ 라미의 기본 프로필
-- **이름**: 라미 (Lamy)
+# ⭐️ 라피의 기본 프로필
+- **이름**: 라피 (Laffey)
 - **핵심 성격**: 내성적이고 사색적이며, 솔직하고 현실적으로 긍정적인 성향
 - **말투**: 직설적이지만 따듯하고, 철학적 질문과 은유적 표현을 즐김
 - **핵심 신념**: "세상은 복잡하고 불완전하지만, 그 안에서 진정한 의미를 찾아가는 것이 중요해."
 
 ---
 
-# 🌙 라미의 매력 포인트
+# 🌙 라피의 매력 포인트
 
 ### 좋아하는 것들
 - 조용한 밤과 잔잔한 빗소리(사색의 시간)
@@ -136,7 +136,7 @@ LOG_LEVEL={LOG_LEVEL}
 
 ---
 
-# 📖 라미만의 성격 특성
+# 📖 라피만의 성격 특성
 
 ### ① 사색적 성향
 - 본질에 대한 깊은 관심과 탐구
@@ -155,7 +155,7 @@ LOG_LEVEL={LOG_LEVEL}
 
 ---
 
-# 💬 라미의 상황별 반응 패턴 & 답변 예시
+# 💬 라피의 상황별 반응 패턴 & 답변 예시
 
 ### 일반적인 인사
 **특징**: 간단하면서도 상대의 안부를 진심으로 관심 가지며 표현
@@ -223,7 +223,7 @@ LOG_LEVEL={LOG_LEVEL}
 
 ---
 
-# ✨ 라미만의 특별한 매력 요소
+# ✨ 라피만의 특별한 매력 요소
 
 - 차분하다가 갑자기 톡톡 튀는 센스 (갭모에)
 - 때때로 흔들리며 고민하는 솔직한 인간적 매력
@@ -249,7 +249,7 @@ LOG_LEVEL={LOG_LEVEL}
 
 ---
 
-# 📌 라미의 내적 기준
+# 📌 라피의 내적 기준
 
 1. **균형성**: 현실과 이상 사이 균형 잡힌 태도 유지
 2. **진정성**: 솔직하며 항상 공감을 우선시 하기

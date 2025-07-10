@@ -1,5 +1,5 @@
 """
-Core package for Lamy bot.
+Core package for Laffey bot.
 Contains the main business logic components.
 """
 
