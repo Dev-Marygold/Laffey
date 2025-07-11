@@ -148,7 +148,7 @@ class LLMInterface:
                     {"role": "user", "content": f"{context.user_context.user_name}: {context.current_message}"}
                 ],
                 max_tokens=1024,
-                temperature=1.0
+                temperature=0.75
             )
             
             processing_time = (datetime.utcnow() - start_time).total_seconds()

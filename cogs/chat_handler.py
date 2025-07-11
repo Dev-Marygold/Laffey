@@ -38,7 +38,7 @@ class ChatHandler(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         """
-        Listen for messages that mention the bot.
+        Listen for messages that mention the bot or start with "라피야".
         This is the primary interface for interacting with Laffey.
         
         Args:
@@ -48,13 +48,22 @@ class ChatHandler(commands.Cog):
         if message.author == self.bot.user:
             return
             
-        # Check if the bot is mentioned
-        if self.bot.user not in message.mentions:
+        # Check if the bot is mentioned or if the message starts with "라피야"
+        is_mentioned = self.bot.user in message.mentions
+        starts_with_laffey = message.content.strip().startswith("라피야")
+        
+        if not is_mentioned and not starts_with_laffey:
             return
             
-        # Remove the mention from the message content
-        content = message.content.replace(f'<@{self.bot.user.id}>', '').strip()
-        content = content.replace(f'<@!{self.bot.user.id}>', '').strip()
+        # Remove the mention or "라피야" from the message content
+        content = message.content
+        if is_mentioned:
+            # Remove the mention from the message content
+            content = content.replace(f'<@{self.bot.user.id}>', '').strip()
+            content = content.replace(f'<@!{self.bot.user.id}>', '').strip()
+        elif starts_with_laffey:
+            # Remove "라피야" from the beginning
+            content = content.strip()[3:].strip()  # "라피야" is 3 characters
         
         # If empty message after removing mention, acknowledge with a greeting
         if not content:
@@ -100,15 +109,25 @@ class ChatHandler(commands.Cog):
     @commands.Cog.listener()
     async def on_message_edit(self, before: discord.Message, after: discord.Message):
         """
-        Handle message edits that mention the bot.
+        Handle message edits that mention the bot or start with "라피야".
         
         Args:
             before: The message before editing
             after: The message after editing
         """
-        # Only process if the bot wasn't mentioned before but is mentioned now
-        if (self.bot.user not in before.mentions and 
-            self.bot.user in after.mentions and
+        # Check if before message had mention or "라피야"
+        before_mentioned = self.bot.user in before.mentions
+        before_starts_with_laffey = before.content.strip().startswith("라피야")
+        before_should_process = before_mentioned or before_starts_with_laffey
+        
+        # Check if after message has mention or "라피야"
+        after_mentioned = self.bot.user in after.mentions
+        after_starts_with_laffey = after.content.strip().startswith("라피야")
+        after_should_process = after_mentioned or after_starts_with_laffey
+        
+        # Only process if the bot wasn't triggered before but is triggered now
+        if (not before_should_process and 
+            after_should_process and
             after.author != self.bot.user):
             
             # Process as a new message
