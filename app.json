@@ -9,12 +9,12 @@
       "description": "Discord Bot Token from Discord Developer Portal",
       "required": true
     },
-    "ANTHROPIC_API_KEY": {
-      "description": "Anthropic Claude API Key",
+    "XAI_API_KEY": {
+      "description": "XAI API Key for Grok-4",
       "required": true
     },
     "OPENAI_API_KEY": {
-      "description": "OpenAI API Key for embeddings",
+      "description": "OpenAI API Key for utility tasks",
       "required": true
     },
     "DEVELOPER_ID": {
