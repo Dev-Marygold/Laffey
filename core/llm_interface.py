@@ -1,6 +1,6 @@
 """
 LLM Interface for Laffey.
-Handles all interactions with OpenAI chatgpt-4o-latest for main responses and GPT-4.1-mini for utility tasks.
+Handles all interactions with OpenAI gpt-4.1 for main responses and GPT-4.1-mini for utility tasks.
 """
 
 import os
@@ -33,7 +33,7 @@ class LLMResponse(BaseModel):
 class LLMInterface:
     """
     Interface for interacting with Large Language Models.
-    Uses OpenAI chatgpt-4o-latest for main responses and GPT-4.1-mini for utility tasks (cost optimization).
+    Uses OpenAI gpt-4.1 for main responses and GPT-4.1-mini for utility tasks (cost optimization).
     """
     
     def __init__(self):
@@ -106,7 +106,7 @@ class LLMInterface:
         
     async def generate_response(self, context: ConversationContext) -> LLMResponse:
         """
-        Generate a response based on the conversation context using chatgpt-4o-latest.
+        Generate a response based on the conversation context using gpt-4.1.
         
         Args:
             context: The full conversation context including memories and identity
@@ -140,15 +140,15 @@ class LLMInterface:
             # Store for debugging
             self.last_prompt = system_prompt
             
-            # Generate response using chatgpt-4o-latest
+            # Generate response using gpt-4.1
             response = await self.openai_client.chat.completions.create(
-                model="chatgpt-4o-latest",
+                model="gpt-4.1",
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": f"{context.user_context.user_name}: {context.current_message}"}
                 ],
-                max_tokens=2048,
-                temperature=0.7
+                max_tokens=1024,
+                temperature=1.0
             )
             
             processing_time = (datetime.utcnow() - start_time).total_seconds()
@@ -160,12 +160,12 @@ class LLMInterface:
                     "completion_tokens": response.usage.completion_tokens,
                     "total_tokens": response.usage.total_tokens
                 },
-                model="chatgpt-4o-latest",
+                model="gpt-4.1",
                 processing_time=processing_time
             )
             
         except Exception as e:
-            logger.error(f"Error generating response with chatgpt-4o-latest: {str(e)}")
+            logger.error(f"Error generating response with gpt-4.1: {str(e)}")
             # Fallback response maintaining character
             return LLMResponse(
                 content="아... 뭔가 내 생각이 엉켜버렸나봐. 가끔은 나도 날 이해 못하겠어. (완벽한 나한테도 이런 일이?)",
