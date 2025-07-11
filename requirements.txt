@@ -26,7 +26,3 @@ aiofiles>=23.2.0
 
 # Logging
 colorlog>=6.8.0
-
-# Development (optional)
-# pytest>=7.4.0
-# pytest-asyncio>=0.23.0 

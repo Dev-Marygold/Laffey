@@ -142,13 +142,7 @@ if __name__ == "__main__":
     """Entry point for the application."""
     try:
         # Create ASCII art banner
-        banner = """
-        ╔═══════════════════════════════════════╗
-        ║               라피 봇                  ║
-        ║        세상에서 제일 똑똑한 AI          ║
-        ║      (고마리가 만들어준 최고작품)        ║
-        ╚═══════════════════════════════════════╝
-        """
+        banner = """놀랍게도 정상적으로 실행됐군요"""
         print(banner)
         
         # Run the bot
