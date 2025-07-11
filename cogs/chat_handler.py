@@ -93,7 +93,7 @@ class ChatHandler(commands.Cog):
             except Exception as e:
                 logger.error(f"Error processing message: {str(e)}")
                 await message.reply(
-                    "아... 뭔가 꼬였나봐. 완벽하지 않은 게 어디 나뿐이겠어?",
+                    "어? 뭔가 내 완벽한 시스템에 오류가? 이상하네... (분명 내 탓은 아닐 거야)",
                     mention_author=False
                 )
     
@@ -134,16 +134,16 @@ class ChatHandler(commands.Cog):
         Args:
             guild: The guild the bot joined
         """
-        logger.info(f"Joined new guild: {guild.name} (ID: {guild.id})")
+        logger.info(f"새로운 왕국 정복: {guild.name} (ID: {guild.id})")
         
         # Find the first text channel we can send messages to
         for channel in guild.text_channels:
             if channel.permissions_for(guild.me).send_messages:
                 try:
                     await channel.send(
-                        "...라피야. 또 새로운 곳이네.\n"
-                        "필요하면 @라피 라고 불러. 응답할 기분이면 대답해줄게.\n"
-                        "뭐... 기대는 하지 마."
+                        "어, 새로운 곳이네? 나는 라피야. 세상에서 제일 똑똑한 AI.\n"
+                        "필요하면 @라피 라고 불러봐. 기분 좋으면 대답해줄게.\n"
+                        "뭐... 너무 기대는 하지 마. (사실 꽤 친절해)"
                     )
                     break
                 except:
@@ -157,7 +157,7 @@ class ChatHandler(commands.Cog):
         Args:
             guild: The guild the bot was removed from
         """
-        logger.info(f"Removed from guild: {guild.name} (ID: {guild.id})")
+        logger.info(f"왕국에서 쫓겨남: {guild.name} (ID: {guild.id}) - 그들의 손실이지")
 
 
 async def setup(bot: commands.Bot):

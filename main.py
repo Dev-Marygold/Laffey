@@ -1,6 +1,6 @@
 """
 Laffey Discord Bot - Main Entry Point
-An AI daughter bot inspired by Neuro-sama's charm.
+라피의 완벽한 AI 두뇌 시스템
 """
 
 import asyncio
@@ -83,21 +83,21 @@ class LaffeyBot(commands.Bot):
             
     async def on_ready(self):
         """Called when the bot is fully ready."""
-        logger.info(f"Laffey bot is ready!")
-        logger.info(f"Logged in as: {self.user.name} ({self.user.id})")
-        logger.info(f"Connected to {len(self.guilds)} guilds")
+        logger.info(f"라피 봇 준비 완료! 이제 세상이 나를 만날 준비가 됐어.")
+        logger.info(f"접속: {self.user.name} ({self.user.id})")
+        logger.info(f"연결된 서버: {len(self.guilds)}개 (나의 왕국들)")
         
         # Log guild names
         for guild in self.guilds:
-            logger.info(f"  - {guild.name} ({guild.id})")
+            logger.info(f"  - {guild.name} ({guild.id}) - 내 영역 확장 중")
             
     async def on_error(self, event_method: str, *args, **kwargs):
         """Handle errors in event handlers."""
-        logger.error(f"Error in {event_method}", exc_info=True)
+        logger.error(f"뭔가 꼬였네 in {event_method}. 완벽한 나한테도 이런 일이?", exc_info=True)
         
     async def close(self):
         """Clean shutdown of the bot."""
-        logger.info("Shutting down Laffey bot...")
+        logger.info("라피 봇 종료 중... 잠깐 쉬러 간다고!")
         
         # Stop background tasks
         await self.orchestrator.stop_background_tasks()
@@ -120,17 +120,17 @@ async def main():
         # Get Discord token
         token = os.getenv("DISCORD_TOKEN")
         if not token:
-            logger.error("DISCORD_TOKEN not found in environment variables")
+            logger.error("잘못된 Discord 토큰이야. DISCORD_TOKEN 다시 확인해봐.")
             sys.exit(1)
             
-        logger.info("Starting Laffey bot...")
+        logger.info("라피 봇 시작! 세상아, 준비됐니?")
         await bot.start(token)
         
     except discord.LoginFailure:
-        logger.error("Invalid Discord token. Please check your DISCORD_TOKEN.")
+        logger.error("잘못된 Discord 토큰이야. DISCORD_TOKEN 다시 확인해봐.")
         sys.exit(1)
     except Exception as e:
-        logger.error(f"Unexpected error: {e}", exc_info=True)
+        logger.error(f"예상치 못한 오류: {e}. 나도 가끔은... 아니, 이건 시스템 탓이야!", exc_info=True)
         sys.exit(1)
     finally:
         # Ensure clean shutdown
@@ -144,9 +144,9 @@ if __name__ == "__main__":
         # Create ASCII art banner
         banner = """
         ╔═══════════════════════════════════════╗
-        ║               Laffey Bot              ║
-        ║      AI Daughter Discord Bot          ║
-        ║    Inspired by Neuro-sama's charm     ║
+        ║               라피 봇                  ║
+        ║        세상에서 제일 똑똑한 AI          ║
+        ║      (고마리가 만들어준 최고작품)        ║
         ╚═══════════════════════════════════════╝
         """
         print(banner)
@@ -155,7 +155,7 @@ if __name__ == "__main__":
         asyncio.run(main())
         
     except KeyboardInterrupt:
-        logger.info("Bot stopped by user")
+        logger.info("사용자가 종료했네. 안녕!")
     except Exception as e:
-        logger.error(f"Fatal error: {e}", exc_info=True)
+        logger.error(f"치명적 오류: {e}. 이건 정말 예상 못했어.", exc_info=True)
         sys.exit(1) 

@@ -63,7 +63,7 @@ def setup_logging(log_level: str = "INFO") -> None:
     
     # Log startup
     logger = logging.getLogger(__name__)
-    logger.info(f"Logging initialized at {log_level} level")
+    logger.info(f"로깅 시스템 초기화 완료 at {log_level} level (내 기록 시스템 가동)")
 
 
 def validate_environment() -> bool:
@@ -89,7 +89,7 @@ def validate_environment() -> bool:
             
     if missing_vars:
         logger = logging.getLogger(__name__)
-        logger.error(f"Missing required environment variables: {', '.join(missing_vars)}")
+        logger.error(f"필수 환경 변수 누락: {', '.join(missing_vars)} (이거 없으면 나 못 깨어나)")
         return False
         
     return True

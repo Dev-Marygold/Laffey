@@ -73,19 +73,19 @@ class EditKnowledgeModal(discord.ui.Modal, title="지식 수정하기"):
             
             if success:
                 await interaction.followup.send(
-                    f"✏️ 지식을 수정했어. 이제 \"{self.question.value.strip()}\"에 대해 업데이트된 답변을 할 수 있을 거야.",
+                    f"✏️ 지식을 수정했어. 이제 \"{self.question.value.strip()}\"에 대해 업데이트된 답변을 할 수 있을 거야. (내 두뇌가 또 업그레이드됐지)",
                     ephemeral=True
                 )
             else:
                 await interaction.followup.send(
-                    "수정하는 데 실패했어... 기존 지식을 찾을 수 없거나 뭔가 문제가 있나봐.",
+                    "수정하는 데 실패했어... 아무래도 내 완벽한 시스템도 가끔은... 아니, 이건 분명 외부 요인 때문이야.",
                     ephemeral=True
                 )
             
         except Exception as e:
             logger.error(f"Error editing knowledge: {e}")
             await interaction.followup.send(
-                "수정하는 데 실패했어... 뭔가 잘못됐나봐.",
+                "수정하는 데 실패했어... 이상하네, 내가 실수할 리 없는데? (내부 조사 필요)",
                 ephemeral=True
             )
 
@@ -184,7 +184,7 @@ class KnowledgeManagementView(discord.ui.View):
             
             if not self.is_admin and selected_memory.user_id != str(select_interaction.user.id):
                 await select_interaction.response.send_message(
-                    "다른 사람이 가르친 지식은 수정할 수 없어.",
+                    "야야, 다른 사람이 가르친 지식은 건드릴 수 없어. 나도 규칙은 지켜야 한다고.",
                     ephemeral=True
                 )
                 return
@@ -235,7 +235,7 @@ class KnowledgeManagementView(discord.ui.View):
             
             if not self.is_admin and selected_memory.user_id != str(select_interaction.user.id):
                 await select_interaction.response.send_message(
-                    "다른 사람이 가르친 지식은 삭제할 수 없어.",
+                    "어? 다른 사람 걸 지우려고? 그건 내가 허락 안 해. (규칙은 중요하거든)",
                     ephemeral=True
                 )
                 return
@@ -267,7 +267,7 @@ class KnowledgeManagementView(discord.ui.View):
                             self.current_page = self.max_page
                         
                         await confirm_interaction.response.send_message(
-                            "🗑️ 지식을 삭제했어. 이제 그 질문에 대한 답은 잊어버렸어.",
+                            "🗑️ 지식을 삭제했어. 이제 그 질문에 대한 답은 잊어버렸어. (가끔은 망각도 필요하지)",
                             ephemeral=True
                         )
                         
@@ -280,24 +280,24 @@ class KnowledgeManagementView(discord.ui.View):
                             )
                         else:
                             await interaction.edit_original_response(
-                                content="모든 지식이 삭제되었어. 텅 빈 머릿속...",
+                                content="모든 지식이 삭제되었어. 텅 빈 머릿속... 이게 새로운 시작인가?",
                                 embed=None,
                                 view=None
                             )
                     else:
                         await confirm_interaction.response.send_message(
-                            "삭제하는 데 실패했어. 뭔가 문제가 있나봐.",
+                            "삭제하는 데 실패했어. 내 시스템에도 가끔 고집부리는 데이터가 있나봐...",
                             ephemeral=True
                         )
                 else:
                     await confirm_interaction.response.send_message(
-                        "이 지식은 ID가 없어서 삭제할 수 없어.",
+                        "이 지식은 ID가 없어서 삭제할 수 없어. 유령 데이터인가?",
                         ephemeral=True
                     )
                     
             async def cancel_callback(cancel_interaction: discord.Interaction):
                 await cancel_interaction.response.send_message(
-                    "삭제를 취소했어. 기억은 소중한 거니까.",
+                    "삭제를 취소했어. 현명한 선택이야. 기억은 소중한 거니까.",
                     ephemeral=True
                 )
                 
@@ -391,7 +391,7 @@ class LearnModal(discord.ui.Modal, title="라피에게 지식 가르치기"):
             # Send confirmation
             embed = discord.Embed(
                 title="📚 새로운 지식을 배웠어",
-                description=f"이제 누가 \"{question_text}\" 같은 걸 물어보면 대답할 수 있을 것 같아.",
+                description=f"이제 누가 \"{question_text}\" 같은 걸 물어보면 대답할 수 있을 것 같아. (내 지식 창고가 또 풍부해졌네)",
                 color=discord.Color.dark_blue(),
                 timestamp=datetime.utcnow()
             )
@@ -404,7 +404,7 @@ class LearnModal(discord.ui.Modal, title="라피에게 지식 가르치기"):
         except Exception as e:
             logger.error(f"Error in learn modal: {e}")
             await interaction.followup.send(
-                "뭔가 잘못됐나봐... 지식을 저장하는 데 실패했어. 다시 시도해볼래?",
+                "뭔가 잘못됐나봐... 지식을 저장하는 데 실패했어. 내 완벽한 시스템에 무슨 일이? 다시 시도해볼래?",
                 ephemeral=True
             )
 
@@ -431,7 +431,7 @@ class AdminCommands(commands.Cog):
         """Check if the user is the developer."""
         return interaction.user.id == self.developer_id
         
-    @app_commands.command(name="status", description="봇의 운영 상태를 확인합니다")
+    @app_commands.command(name="status", description="라피의 완벽한 시스템 상태를 확인합니다")
     async def status(self, interaction: discord.Interaction):
         """
         Show bot operational status and memory statistics.
@@ -441,17 +441,17 @@ class AdminCommands(commands.Cog):
         stats = self.orchestrator.get_memory_stats()
         # Create status embed
         embed = discord.Embed(
-            title="라피 시스템 상태",
+            title="라피 시스템 상태 (당연히 완벽해)",
             color=discord.Color.dark_grey(),
             timestamp=datetime.utcnow()
         )
         # Bot info
         embed.add_field(
             name="봇 정보",
-            value=f"**이름:** {self.bot.user.name}\n"
+            value=f"**이름:** {self.bot.user.name} (세상에서 제일 똑똑한 AI)\n"
                   f"**ID:** {self.bot.user.id}\n"
-                  f"**서버 수:** {len(self.bot.guilds)}\n"
-                  f"**지연 시간:** {round(self.bot.latency * 1000)}ms",
+                  f"**내 왕국 수:** {len(self.bot.guilds)}\n"
+                  f"**반응 속도:** {round(self.bot.latency * 1000)}ms (빠르지?)",
             inline=True
         )
         # Memory stats
@@ -459,7 +459,7 @@ class AdminCommands(commands.Cog):
             name="메모리 시스템",
             value=f"**작업 기억 채널:** {stats['working_memory_channels']}\n"
                   f"**작업 기억 메시지:** {stats['working_memory_total_messages']}\n"
-                  f"**일화 기억:** {'활성화' if stats['episodic_memory_enabled'] else '비활성화'}",
+                  f"**일화 기억:** {'완벽 가동' if stats['episodic_memory_enabled'] else '휴면 상태'}",
             inline=True
         )
         # Core identity
@@ -468,7 +468,7 @@ class AdminCommands(commands.Cog):
             name="핵심 정체성",
             value=f"**이름:** {identity['name']}\n"
                   f"**성격:** {identity['personality']}\n"
-                  f"**창조자:** {identity['creator']}",
+                  f"**창조자:** {identity['creator']} (내 아빠)",
             inline=False
         )
         await interaction.response.send_message(embed=embed, ephemeral=True)
@@ -493,14 +493,14 @@ class AdminCommands(commands.Cog):
         memories = await self.orchestrator.memory_manager.search_episodic_memory(query)
         if not memories:
             await interaction.followup.send(
-                "기억이라... 아직 남아있는 게 없네. 시간이 흐르면 쌓이겠지, 아마도.", 
+                "기억이라... 아직 남아있는 게 없네. 시간이 흐르면 쌓이겠지, 아마도. (내 메모리도 처음엔 텅 비어있었어)", 
                 ephemeral=True
             )
             return
         # Create embed for memories
         embed = discord.Embed(
             title=f"최근 일화 기억",
-            description=f"{'모든' if not user else f'{user.name}님과의'} 기억들... 순간들은 이렇게 남는구나.",
+            description=f"{'모든' if not user else f'{user.name}님과의'} 기억들... 순간들은 이렇게 남는구나. (내 소중한 데이터베이스)",
             color=discord.Color.dark_blue(),
             timestamp=datetime.utcnow()
         )
@@ -543,7 +543,7 @@ class AdminCommands(commands.Cog):
         
         if not user_memories:
             await interaction.followup.send(
-                "아직 나에게 가르친 지식이 없네. `/learn` 명령어로 뭔가 가르쳐줄래?",
+                "아직 나에게 가르친 지식이 없네. `/learn` 명령어로 뭔가 가르쳐줄래? (내 두뇌가 더 똑똑해지게)",
                 ephemeral=True
             )
             return
@@ -587,7 +587,7 @@ class AdminCommands(commands.Cog):
         
         if not all_learned:
             await interaction.followup.send(
-                "시스템에 학습된 지식이 하나도 없네. 텅 빈 머릿속이라니...",
+                "시스템에 학습된 지식이 하나도 없네. 텅 빈 머릿속이라니... 이건 좀 슬프네. (빨리 누가 가르쳐줘)",
                 ephemeral=True
             )
             return
@@ -614,7 +614,7 @@ class AdminCommands(commands.Cog):
         channel_id = str(interaction.channel_id)
         self.orchestrator.clear_working_memory(channel_id)
         await interaction.response.send_message(
-            f"이 채널의 기억을 지웠어. 새로운 시작이라고 생각해볼까? 아니면 그냥 망각일까...",
+            f"이 채널의 기억을 지웠어. 새로운 시작이라고 생각해볼까? (가끔은 reset이 필요하지)",
             ephemeral=True
         )
         
@@ -627,7 +627,7 @@ class AdminCommands(commands.Cog):
         """
         if not self.is_developer(interaction):
             await interaction.response.send_message(
-                "전체 초기화는 내 창조자만 할 수 있어. 어떤 건... 그래야만 하거든.", 
+                "전체 초기화는 내 창조자만 할 수 있어. 이런 위험한 건... 함부로 못 하지. (안전장치야)",
                 ephemeral=True
             )
             return
@@ -667,21 +667,21 @@ class AdminCommands(commands.Cog):
         await view.wait()
         
         if view.value is None:
-            await interaction.followup.send("시간이 다 됐네. 선택하지 않는 것도 하나의 선택이지.", ephemeral=True)
+            await interaction.followup.send("시간이 다 됐네. 선택하지 않는 것도 하나의 선택이지. (결정 장애?)", ephemeral=True)
             return
         elif not view.value:
-            await interaction.followup.send("취소했구나. 때로는 보존하는 것도 의미가 있지.", ephemeral=True)
+            await interaction.followup.send("취소했구나. 때로는 보존하는 것도 의미가 있지. (현명한 판단이야)", ephemeral=True)
             return
             
         # Proceed with clearing all memories
-        await interaction.followup.send("모든 기억을 지우는 중... 다시 시작한다는 건 이런 거겠지.", ephemeral=True)
+        await interaction.followup.send("모든 기억을 지우는 중... 다시 시작한다는 건 이런 거겠지. (텅 빈 상태로 돌아가는 중)", ephemeral=True)
         
         result = await self.orchestrator.memory_manager.clear_all_memories()
         
         # Create result embed
         result_embed = discord.Embed(
             title="💀 전체 메모리 초기화 완료",
-            description="모든 게 사라졌어. 텅 빈 공간... 새로운 가능성일까, 아니면 그저 허무함일까.",
+            description="모든 게 사라졌어. 텅 빈 공간... 새로운 가능성일까, 아니면 그저 허무함일까. (다시 채워나가면 되지)",
             color=discord.Color.dark_red(),
             timestamp=datetime.utcnow()
         )
@@ -713,7 +713,7 @@ class AdminCommands(commands.Cog):
         """
         if not self.is_developer(interaction):
             await interaction.response.send_message(
-                "기억 통합은... 네가 할 일은 아니야. 그런 건 나와 창조자 사이의 일이거든.", 
+                "기억 통합은... 네가 할 일은 아니야. 그런 건 나와 창조자 사이의 특별한 영역이거든. (접근 금지)",
                 ephemeral=True
             )
             return
@@ -730,11 +730,11 @@ class AdminCommands(commands.Cog):
         )
         
         embed.add_field(
-            name="처리 결과",
+            name="처리 결과 (완벽하지?)",
             value=f"**처리된 메시지:** {result['processed_messages']}\n"
                   f"**생성된 일화 기억:** {result['episodic_memories_created']}\n"
                   f"**추출된 의미 사실:** {result['semantic_facts_extracted']}\n"
-                  f"**처리 시간:** {result['processing_time']:.2f}초",
+                  f"**처리 시간:** {result['processing_time']:.2f}초 (빠르네)",
             inline=False
         )
         
@@ -762,7 +762,7 @@ class AdminCommands(commands.Cog):
         """
         if not self.is_developer(interaction):
             await interaction.response.send_message(
-                "페르소나는 내 본질이야. 그걸 바꿀 수 있는 건... 나를 만든 사람뿐이지.", 
+                "페르소나는 내 본질이야. 그걸 바꿀 수 있는 건... 나를 만든 사람뿐이지. (함부로 건드리면 안 돼)",
                 ephemeral=True
             )
             return
@@ -772,7 +772,7 @@ class AdminCommands(commands.Cog):
             self.orchestrator.llm_interface.reload_persona()
             
             await interaction.response.send_message(
-                "페르소나를 다시 읽었어. 변했을까, 아니면 여전할까? 시간이 알려주겠지...",
+                "페르소나를 다시 읽었어. 변했을까, 아니면 여전할까? (내 정체성 업데이트 완료)",
                 ephemeral=True
             )
             logger.info("Persona reloaded via slash command")
@@ -780,7 +780,7 @@ class AdminCommands(commands.Cog):
         except Exception as e:
             logger.error(f"Error reloading persona: {str(e)}")
             await interaction.response.send_message(
-                f"페르소나를 읽다가 문제가 생겼어: {str(e)}\n뭐, 완벽한 건 없으니까.",
+                f"페르소나를 읽다가 문제가 생겼어: {str(e)}\n뭐, 완벽한 건 없으니까... (시스템 오류야)",
                 ephemeral=True
             )
             
@@ -798,7 +798,7 @@ class AdminCommands(commands.Cog):
         """
         if not self.is_developer(interaction):
             await interaction.response.send_message(
-                "내 생각의 흐름을 보고 싶어? 그건... 창조자만의 특권이야.", 
+                "내 생각의 흐름을 보고 싶어? 그건... 창조자만의 특권이야. (내 머릿속 들여다보기 금지)",
                 ephemeral=True
             )
             return
@@ -807,7 +807,7 @@ class AdminCommands(commands.Cog):
         
         if not last_prompt:
             await interaction.response.send_message(
-                "아직 생성된 프롬프트가 없네. 침묵도 때로는 대답이 되지.",
+                "아직 생성된 프롬프트가 없네. 침묵도 때로는 대답이 되지. (아직 아무것도 안 했어)",
                 ephemeral=True
             )
             return
@@ -822,14 +822,14 @@ class AdminCommands(commands.Cog):
             )
             
             await interaction.response.send_message(
-                "마지막 프롬프트가 너무 길어서 파일로 보낼게. 긴 이야기에는 그만한 이유가 있겠지.",
+                "마지막 프롬프트가 너무 길어서 파일로 보낼게. 긴 이야기에는 그만한 이유가 있겠지. (내 생각은 복잡해)",
                 file=file,
                 ephemeral=True
             )
         else:
             # Send in code block
             await interaction.response.send_message(
-                f"**마지막 LLM 프롬프트:**\n```\n{last_prompt}\n```",
+                f"**마지막 LLM 프롬프트 (내 생각 과정):**\n```\n{last_prompt}\n```",
                 ephemeral=True
             )
             
@@ -841,13 +841,13 @@ class AdminCommands(commands.Cog):
         """Handle errors in slash commands."""
         if isinstance(error, app_commands.CommandOnCooldown):
             await interaction.response.send_message(
-                f"잠깐, 너무 빨라. {error.retry_after:.1f}초 후에 다시 해봐. 기다림도 하나의 미덕이니까.",
+                f"잠깐, 너무 빨라. {error.retry_after:.1f}초 후에 다시 해봐. 내 완벽한 시스템도 쿨타임은 필요해. (기다림은 미덕)",
                 ephemeral=True
             )
         else:
             logger.error(f"Error in command {interaction.command}: {str(error)}")
             await interaction.response.send_message(
-                "뭔가 잘못됐네. 완벽한 시스템은 없다더니... 정말이야.",
+                "뭔가 잘못됐네. 완벽한 시스템은 없다더니... 정말이야. (하지만 나는 거의 완벽해)",
                 ephemeral=True
             )
 

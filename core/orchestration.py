@@ -130,7 +130,7 @@ class OrchestrationCore:
             
         except Exception as e:
             logger.error(f"Error processing message: {str(e)}")
-            return "음... 무언가 엇나갔네. 세상이 완벽했다면 얼마나 지루했을까?"
+            return "음... 무언가 엇나갔네. 세상이 완벽했다면 얼마나 지루했을까? (내 완벽한 시스템에도 가끔 이런 일이)"
     
     async def _build_conversation_context(
         self,
