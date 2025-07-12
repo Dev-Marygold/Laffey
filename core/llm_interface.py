@@ -1,6 +1,6 @@
 """
 LLM Interface for Laffey.
-Handles all interactions with OpenAI gpt-4.1 for main responses and GPT-4.1-mini for utility tasks.
+Handles all interactions with claude-sonnet-4-20250514 for main responses and GPT-4.1-mini for utility tasks.
 """
 
 import os
@@ -16,6 +16,7 @@ from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from pydantic import BaseModel, Field
 import openai
+import anthropic
 
 from core.models import ConversationContext, WorkingMemoryItem, EpisodicMemoryItem
 
@@ -33,17 +34,25 @@ class LLMResponse(BaseModel):
 class LLMInterface:
     """
     Interface for interacting with Large Language Models.
-    Uses OpenAI gpt-4.1 for main responses and GPT-4.1-mini for utility tasks (cost optimization).
+    Uses claude-sonnet-4-20250514 for main responses and GPT-4.1-mini for utility tasks (cost optimization).
     """
     
     def __init__(self):
-        """Initialize the LLM interface with OpenAI."""
-        # OpenAI for both main responses and utility tasks
+        """Initialize the LLM interface with Claude and OpenAI."""
+        # Anthropic for main responses
+        anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+        if not anthropic_key:
+            raise ValueError("ANTHROPIC_API_KEY environment variable is not set")
+        
+        # OpenAI for utility tasks
         openai_key = os.getenv("OPENAI_API_KEY")
         if not openai_key:
             raise ValueError("OPENAI_API_KEY environment variable is not set")
         
-        # OpenAI client for all tasks
+        # Claude client for main responses
+        self.anthropic_client = anthropic.Anthropic(api_key=anthropic_key)
+        
+        # OpenAI client for utility tasks
         self.openai_client = openai.AsyncOpenAI(api_key=openai_key)
         
         # Load persona from file
@@ -106,7 +115,7 @@ class LLMInterface:
         
     async def generate_response(self, context: ConversationContext) -> LLMResponse:
         """
-        Generate a response based on the conversation context using gpt-4.1.
+        Generate a response based on the conversation context using claude-sonnet-4-20250514.
         
         Args:
             context: The full conversation context including memories and identity
@@ -140,32 +149,40 @@ class LLMInterface:
             # Store for debugging
             self.last_prompt = system_prompt
             
-            # Generate response using gpt-4.1
-            response = await self.openai_client.chat.completions.create(
-                model="gpt-4.1",
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": f"{context.user_context.user_name}: {context.current_message}"}
-                ],
-                max_tokens=1024,
-                temperature=0.75
+            # Generate response using claude-sonnet-4-20250514.
+            # Run in executor to avoid blocking the async loop
+            loop = asyncio.get_event_loop()
+            message = await loop.run_in_executor(
+                None, 
+                lambda: self.anthropic_client.messages.create(
+                    model="claude-sonnet-4-20250514",
+                    max_tokens=1024,
+                    temperature=1.0,
+                    system=system_prompt,
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": f"{context.user_context.user_name}: {context.current_message}"
+                        }
+                    ]
+                )
             )
             
             processing_time = (datetime.utcnow() - start_time).total_seconds()
             
             return LLMResponse(
-                content=response.choices[0].message.content,
+                content=message.content[0].text,
                 usage={
-                    "prompt_tokens": response.usage.prompt_tokens,
-                    "completion_tokens": response.usage.completion_tokens,
-                    "total_tokens": response.usage.total_tokens
+                    "prompt_tokens": message.usage.input_tokens,
+                    "completion_tokens": message.usage.output_tokens,
+                    "total_tokens": message.usage.input_tokens + message.usage.output_tokens
                 },
-                model="gpt-4.1",
+                model="claude-sonnet-4-20250514",
                 processing_time=processing_time
             )
             
         except Exception as e:
-            logger.error(f"Error generating response with gpt-4.1: {str(e)}")
+            logger.error(f"Error generating response with : {str(e)}")
             # Fallback response maintaining character
             return LLMResponse(
                 content="아... 뭔가 내 생각이 엉켜버렸나봐. 가끔은 나도 날 이해 못하겠어. (완벽한 나한테도 이런 일이?)",
